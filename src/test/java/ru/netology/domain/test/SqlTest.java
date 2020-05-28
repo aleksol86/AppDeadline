@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.data.DataHelper;
-import ru.netology.domain.page.DashboardPage;
 import ru.netology.domain.page.LoginPage;
 import ru.netology.domain.sql.Sql;
 
@@ -27,8 +26,8 @@ public class SqlTest {
         val loginPage = new LoginPage();
         val authInfo = DataHelper.getValidAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
-        val verificationCode = Sql.getVerificationCode();
-        DashboardPage verify = verificationPage.verify(verificationCode);
+        val verificationCode = Sql.getVerificationCode(authInfo.getLogin());
+        val verify = verificationPage.verify(verificationCode);
         verify.checkIfVisible();
     }
 
@@ -41,7 +40,7 @@ public class SqlTest {
         loginPage.validLogin(authInfo);
         loginPage.cleanLoginFields();
         loginPage.validLogin(authInfo);
-        val statusSQL = mySql.getStatusFromDb();
+        val statusSQL = mySql.getStatusFromDb(authInfo.getLogin());
         assertEquals("blocked", statusSQL);
     }
 

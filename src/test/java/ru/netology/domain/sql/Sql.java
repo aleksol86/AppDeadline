@@ -13,13 +13,13 @@ public class Sql {
         return connection;
     }
 
-    public static String getVerificationCode() throws SQLException {
+    public static String getVerificationCode(String login) throws SQLException {
         String userId = null;
         val dataSQL = "SELECT id FROM users WHERE login = ?;";
         try (val conn = getConnection();
              val idStmt = conn.prepareStatement(dataSQL);
         ) {
-            idStmt.setString(1, "vasya");
+            idStmt.setString(1, login);
             try (val rs = idStmt.executeQuery()) {
                 if (rs.next()) {
                     userId = rs.getString("id");
@@ -41,12 +41,12 @@ public class Sql {
         return code;
     }
 
-    public String getStatusFromDb() throws SQLException {
+    public String getStatusFromDb(String login) throws SQLException {
         String statusSQL = "SELECT status FROM users WHERE login = ?;";
         String status = null;
         try (val conn = getConnection();
              val statusStmt = conn.prepareStatement(statusSQL);) {
-            statusStmt.setString(1, "vasya");
+            statusStmt.setString(1, login);
             try (val rs = statusStmt.executeQuery()) {
                 if (rs.next()) {
                     status = rs.getString("status");
