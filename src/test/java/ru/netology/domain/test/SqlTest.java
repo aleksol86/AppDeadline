@@ -45,7 +45,7 @@ public class SqlTest {
     }
 
     @AfterAll
-    static void close() throws SQLException {
+    static void clean() throws SQLException {
         Sql.cleanDb();
     }
 }
