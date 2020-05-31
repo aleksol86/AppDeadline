@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class Sql {
     public static Connection getConnection() throws SQLException {
         final Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://127.0.0.1:3306/app", "app", "pass");
+                "jdbc:mysql://198.168.99.100/app", "app", "pass");
         return connection;
     }
 
