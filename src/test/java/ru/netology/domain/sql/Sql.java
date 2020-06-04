@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class Sql {
     public static Connection getConnection() throws SQLException {
         final Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://198.168.99.100/app", "app", "pass");
+                "jdbc:mysql://198.168.99.100:3306/app", "user", "pass");
         return connection;
     }
 
@@ -41,7 +41,7 @@ public class Sql {
         return code;
     }
 
-    public String getStatusFromDb(String login) throws SQLException {
+    public static String getStatusFromDb(String login) throws SQLException {
         String statusSQL = "SELECT status FROM users WHERE login = ?;";
         String status = null;
         try (val conn = getConnection();
